@@ -7,9 +7,9 @@
 <body>
 <div>
 {% block main %}
-<div>{% block userinfo%}{{userinfo.username}}{% endblock %}</div>
+<div>{% block nav %}{{userinfo.username}}{% endblock %}</div>
 
-<div>{% block share %}<h3>{{usershare}}</h3>{{usershare.ctime}}{{usershare.tags}}
+<div>{% block content %}<h3>{{usershare}}</h3>{{usershare.ctime}}{{usershare.tags}}
 <p>{{usershare.codes}}</p>
 {% endblock %}
 </div>
