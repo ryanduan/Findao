@@ -16,4 +16,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^index/$','manji.views.index'),
     url(r'^regist/','manji.views.regist'),
+    url(r'^login/$','manji.views.login'),
+    url(r'^logout/$','manji.views.logout'),
 )
