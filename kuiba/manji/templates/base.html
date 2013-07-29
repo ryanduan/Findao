@@ -7,10 +7,10 @@
 <body>
 <div>
 {% block main %}
-<div>{% block nav %}{{userinfo.username}}{% endblock %}</div>
+<div>{% block nav %}{% endblock %}</div>
 
-<div>{% block content %}<h3>{{usershare}}</h3>{{usershare.ctime}}{{usershare.tags}}
-<p>{{usershare.codes}}</p>
+<div>{% block content %}
+
 {% endblock %}
 </div>
 {% block footer %}
