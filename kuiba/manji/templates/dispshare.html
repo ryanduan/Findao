@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %} 欢迎来到凡道平台{% endblock %}
+{% block nav %} {% if user %}
+{{user.username}}<a href="/logout/">注销</a>
+{% else %}
+<a href="/login/">登录</a>
+<a href="/regist/">注册</a>
+{% endif %}{% endblock %}
+{% block content %}
+<div>
+<div>
+{% for share in shares %}
+<li>{{share.title}}</li>
+{% endfor %}
+</div>
+<div>
+{% for share in shares %}
+<h4>{{share.title}}</h4>
+<p>{{share.ctime}}</p>
+<p>{{share.codes}}</p>
+{% endfor %}
+</div>
+</div>
+{% endblock %}
