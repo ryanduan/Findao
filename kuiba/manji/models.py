@@ -21,6 +21,7 @@ class FindaoTag(models.Model):
 class FindaoShare(models.Model):
     tags = models.ManyToManyField(FindaoTag)
     whose = models.ForeignKey(User)
+#    tags = models.ForeignKey(FindaoTag)
     title = models.CharField(max_length=60)
     codes = models.TextField()
     ctime = models.DateTimeField(auto_now_add=True)

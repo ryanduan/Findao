@@ -2,11 +2,25 @@
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from models import FindaoUserInfo, FindaoTag, FindaoShare
-from forms import RegistUserForm, LoginUserForm
-from db_control import oldUser, addUser, findUser, findShare
+from forms import RegistUserForm, LoginUserForm, ShareForm
+from db_control import oldUser, addUser, findUser, findShare, addShare
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
 import hashlib
+
+def createshare(req):
+    user = req.session.get('user', None)
+    if req.method == 'POST':  
+	sf = ShareForm(req.POST)
+	if sf.is_valid():
+	    title = sf.cleaned_data['title']
+	    codes = sf.cleaned_data['codes']
+	    tags = sf.cleaned_data['tags']
+	    addShare(user, title, codes, tags)
+	return HttpResponseRedirect('/dispshare/')
+    else:
+	sf = ShareForm()
+        return render_to_response('createshare.html',{'user':user, 'sf':sf})
 
 def dispshare(req):
     user = req.session.get('user', None)
@@ -14,7 +28,7 @@ def dispshare(req):
         shares = findShare(user)
         return render_to_response('dispshare.html',{'user':user, 'shares':shares})
     else:
-	return HttpResponseRedirect('/index')
+	return HttpResponseRedirect('/index/')
 
 def logout(req):
     del req.session['user']

@@ -1,6 +1,13 @@
 #coding:utf8
 from django import forms
 from django.contrib.auth.models import User
+from models import FindaoShare, FindaoTag, FindaoUserInfo
+
+class ShareForm(forms.ModelForm):
+    class Meta:
+        model = FindaoShare
+	fields = ('title', 'codes', 'tags')
+
 class RegistUserForm(forms.Form):
     username = forms.CharField(
         label='用户名', 

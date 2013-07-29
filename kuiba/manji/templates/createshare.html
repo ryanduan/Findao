@@ -8,20 +8,15 @@
 {% endif %}{% endblock %}
 {% block content %}
 <div>
+<h3>新建一个分享</h3>
+<form method="post" >
+{{sf.as_p}}
+<input type="submit" value="提交" />
+</form>
 <div>
-<a href="/createshare/" >增加一个分享</a>
 </div>
 <div>
-{% for share in shares %}
-<li>{{share.title}}</li>
-{% endfor %}
-</div>
-<div>
-{% for share in shares %}
-<h4>{{share.title}}</h4>
-<p>{{share.ctime}}{{share.tags.tagname}}</p>
-<p>{{share.codes}}</p>
-{% endfor %}
+
 </div>
 </div>
 {% endblock %}
