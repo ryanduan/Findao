@@ -18,4 +18,5 @@ urlpatterns = patterns('',
     url(r'^regist/','manji.views.regist'),
     url(r'^login/$','manji.views.login'),
     url(r'^logout/$','manji.views.logout'),
+    url(r'^dispshare','manji.views.dispshare'),
 )

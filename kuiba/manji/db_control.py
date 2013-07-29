@@ -2,6 +2,15 @@
 #from models import FindaoUserInfo, FindaoTag, FindaoShare
 from django.contrib.auth.models import User, Group
 from django.core.exceptions import ObjectDoesNotExist
+from models import FindaoShare, FindaoUserInfo, FindaoTag
+#class Auths(object):
+
+#def __init__(self):
+#    Group.objects.create(name='findaousers')
+    
+def getTags(share):
+    tags = share.tags.all()
+    return tags
 
 def oldUser(username):
     try:
@@ -26,4 +35,8 @@ def findUser(username, password):
     except ObjectDoesNotExist:
         user = None
     return user
+
+def findShare(username):
+    shares = FindaoShare.objects.filter(whose__exact=username)
+    return shares
 

@@ -3,10 +3,18 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from models import FindaoUserInfo, FindaoTag, FindaoShare
 from forms import RegistUserForm, LoginUserForm
-from db_control import oldUser, addUser, findUser
+from db_control import oldUser, addUser, findUser, findShare
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
 import hashlib
+
+def dispshare(req):
+    user = req.session.get('user', None)
+    if user:
+        shares = findShare(user)
+        return render_to_response('dispshare.html',{'user':user, 'shares':shares})
+    else:
+	return HttpResponseRedirect('/index')
 
 def logout(req):
     del req.session['user']
@@ -22,7 +30,7 @@ def login(req):
 	    user = findUser(username, password)
 	    if user:
 		req.session['user'] = user
-		return render_to_response('index.html',{'user':user})
+		return HttpResponseRedirect('/index/')
 	    else:
 		uf = LoginUserForm()
 		errorinfo = '用户或密码不正确！'
@@ -58,4 +66,5 @@ def regist(req):
 	
 
 def index(req):
-    return render_to_response('index.html',{})
+    user = req.session.get('user', None)
+    return render_to_response('index.html',{'user':user})
