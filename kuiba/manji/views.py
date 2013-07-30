@@ -3,7 +3,7 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from models import FindaoUserInfo, FindaoTag, FindaoShare
 from forms import RegistUserForm, LoginUserForm, ShareForm, UserInfo
-from db_control import oldUser, addUser, findUser, findShare, addShare, addUserInfo
+from db_control import oldUser, addUser, findUser, findShare, addShare, addUserInfo, allShare
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
 import hashlib
@@ -109,4 +109,5 @@ def regist(req):
 
 def index(req):
     user = req.session.get('user', None)
-    return render_to_response('index.html',{'user':user})
+    shares = allShare()
+    return render_to_response('index.html',{'user':user, 'shares':shares})

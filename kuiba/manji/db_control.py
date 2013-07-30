@@ -67,3 +67,6 @@ def findShare(username):
     shares = FindaoShare.objects.filter(whose__exact=username)
     return shares
 
+def allShare():
+    shares = FindaoShare.objects.all()
+    return shares
