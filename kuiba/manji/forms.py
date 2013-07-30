@@ -4,9 +4,10 @@ from django.contrib.auth.models import User
 from models import FindaoShare, FindaoTag, FindaoUserInfo
 
 class ShareForm(forms.ModelForm):
+    tags = forms.CharField(max_length=20)
     class Meta:
         model = FindaoShare
-	fields = ('title', 'codes', 'tags')
+	fields = ('title', 'codes')
 
 class RegistUserForm(forms.Form):
     username = forms.CharField(
