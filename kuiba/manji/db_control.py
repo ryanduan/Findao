@@ -8,6 +8,12 @@ from models import FindaoShare, FindaoUserInfo, FindaoTag
 #def __init__(self):
 #    Group.objects.create(name='findaousers')
     
+
+def addUserInfo(user, gender, birthday, address, firstname, lastname, email):
+    FindaoUserInfo.objects.create(user=user, gender=gender, birthday=birthday,address=address)
+    User.objects.filter(id=user.id).update(first_name=firstname, last_name=lastname, email=email)
+#    User.objects.create(first_name=firstname, last_name=lastname, email=email)
+
 def addShare(user, title, codes, tags):
     user.findaoshare_set.create(title=title, codes=codes)
     share = FindaoShare.objects.get(title=title, codes=codes)

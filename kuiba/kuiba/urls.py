@@ -20,4 +20,6 @@ urlpatterns = patterns('',
     url(r'^logout/$','manji.views.logout'),
     url(r'^dispshare','manji.views.dispshare'),
     url(r'^createshare','manji.views.createshare'),
+    url(r'^dispuser','manji.views.dispuser'),
+    url(r'^userinfo','manji.views.userinfo'),
 )

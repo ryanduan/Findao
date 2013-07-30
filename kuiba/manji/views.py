@@ -2,11 +2,36 @@
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from models import FindaoUserInfo, FindaoTag, FindaoShare
-from forms import RegistUserForm, LoginUserForm, ShareForm
-from db_control import oldUser, addUser, findUser, findShare, addShare
+from forms import RegistUserForm, LoginUserForm, ShareForm, UserInfo
+from db_control import oldUser, addUser, findUser, findShare, addShare, addUserInfo
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
 import hashlib
+
+def userinfo(req):
+    user = req.session.get('user',None)
+    if req.method == 'POST':
+	ui = UserInfo(req.POST)
+	if ui.is_valid():
+	    gender = ui.cleaned_data['gender']
+	    birthday = ui.cleaned_data['birthday']
+	    address = ui.cleaned_data['address']
+	    firstname = ui.cleaned_data['first_name']
+	    lastname = ui.cleaned_data['last_name']
+	    email = ui.cleaned_data['email']
+	    addUserInfo(user, gender, birthday, address, firstname, lastname, email)
+	    return render_to_response('dispuser.html',{'user':user})
+	
+    else:
+	ui = UserInfo()
+	return render_to_response('userinfo.html',{'user':user, 'ui':ui})
+
+def dispuser(req):
+    user = req.session.get('user',None)
+    if user:
+        return render_to_response('dispuser.html',{'user':user})
+    else:
+	return HttpResponseRedirect('/index/')
 
 def createshare(req):
     user = req.session.get('user', None)
@@ -44,7 +69,7 @@ def login(req):
 	    user = findUser(username, password)
 	    if user:
 		req.session['user'] = user
-		return HttpResponseRedirect('/index/')
+		return HttpResponseRedirect('/dispuser/')
 	    else:
 		uf = LoginUserForm()
 		errorinfo = '用户或密码不正确！'
@@ -69,7 +94,10 @@ def regist(req):
 	        if p1 == p2:
 	            password = hashlib.md5(p1).hexdigest()
 	            addUser(username, password)
-	            return HttpResponseRedirect('/index/')
+		    user = findUser(username, password)
+		    if user:
+		        req.session['user'] = user
+	                return HttpResponseRedirect('/userinfo/')
 	        else:
 	            errorinfo = '两次密码不匹配'
                     uf = RegistUserForm()
