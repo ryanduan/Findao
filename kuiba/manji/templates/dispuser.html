@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block title %} 欢迎来到凡道平台{% endblock %}
 {% block nav %} 
-{{user.username}}<a href="/logout/">注销</a>
+{{user.username}}
+<a href="/logout/">注销</a>
+<a href="/userinfo/" >完善用户信息</a>
 {% endblock %}
 {% block content %}
 <div>
@@ -17,7 +19,7 @@
 {% for share in shares %}
 <h4>{{share.title}}</h4>
 <p>{{share.ctime}}{{share.tags.tagname}}</p>
-<div>{{share.codes}}</div>
+<p>{{share.codes}}</p>
 {% endfor %}
 </div>
 </div>

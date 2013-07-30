@@ -8,6 +8,33 @@ from models import FindaoShare, FindaoUserInfo, FindaoTag
 #def __init__(self):
 #    Group.objects.create(name='findaousers')
     
+
+def addUserInfo(user, gender, birthday, address, firstname, lastname, email):
+    FindaoUserInfo.objects.create(user=user, gender=gender, birthday=birthday,address=address)
+    User.objects.filter(id=user.id).update(first_name=firstname, last_name=lastname, email=email)
+#    User.objects.create(first_name=firstname, last_name=lastname, email=email)
+
+def addShare(user, title, codes, tags):
+    user.findaoshare_set.create(title=title, codes=codes)
+    share = FindaoShare.objects.get(title=title, codes=codes)
+#    for tag in tags:
+#	try:
+#	    rtag = FindaoTag.objects.get(tagname=tag)
+#        except ObjectDoesNotExist:
+#	    rtag = None
+#	if rtag:
+#	    share.tags.add(rtag)
+#	else:
+#            share.tags.create(tagname=tag)
+    try:
+        rtag = FindaoTag.objects.get(tagname=tags)
+    except ObjectDoesNotExist:
+        rtag = None
+    if rtag:
+        share.tags.add(rtag)
+    else:
+         share.tags.create(tagname=tags)
+ 
 def getTags(share):
     tags = share.tags.all()
     return tags
@@ -40,3 +67,6 @@ def findShare(username):
     shares = FindaoShare.objects.filter(whose__exact=username)
     return shares
 
+def allShare():
+    shares = FindaoShare.objects.all()
+    return shares

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %} 欢迎来到凡道平台{% endblock %}
+{% block nav %} 
+{{user.username}}
+{% endblock %}
+{% block content %}
+<div>
+
+<div>
+<form method="post" >
+{{ui.as_p}}
+<input type="submit" value="提交" />
+</form>
+
+</div>
+</div>
+{% endblock %}
