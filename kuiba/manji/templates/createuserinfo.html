@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %} 欢迎来到凡道平台{% endblock %}
+{% block user %} 
+<a href="/dispuser/">{{user.username}}</a>
+{% endblock %}
+{% block codes %}
+
+<form class="form-horizontal" method="post" >
+{{ui.as_p}}
+<input type="submit" value="提交" />
+</form>
+<a href="/dispuser/" >返回个人主页</a>
+
+{% endblock %}

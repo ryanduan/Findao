@@ -1,17 +1,20 @@
 {% extends "base.html" %}
 {% block title %} 欢迎来到凡道平台{% endblock %}
-{% block nav %} 
-{{user.username}}
+{% block user %} 
+<a href="/dispuser/">{{user.username}}</a>
 {% endblock %}
-{% block content %}
-<div>
+{% block codes %}
 
-<div>
-<form method="post" >
-{{ui.as_p}}
-<input type="submit" value="提交" />
-</form>
-<a href="/dispuser/" >返回个人主页</a>
-</div>
-</div>
+<h4>{{user.username}}</h4>
+<dl class="dl-horizontal">
+  <dt>姓：</dt>  <dd>{{user.first_name}}</dd><hr />
+  <dt>名：</dt>  <dd>{{user.last_name}}</dd><hr />
+  <dt>出生日期：</dt>  <dd>{{userinfo.birthday}}</dd><hr />
+  <dt>性别：</dt>  <dd>{{userinfo.gender}}</dd><hr />
+  <dt>地址：</dt>  <dd>{{userinfo.address}}</dd><hr />
+  <dt>邮箱：</dt>  <dd>{{user.email}}</dd><hr />
+</dl>
+
+<a href="/createuserinfo/" >修改</a>
+<a href="/dispuser/">返回</a>
 {% endblock %}

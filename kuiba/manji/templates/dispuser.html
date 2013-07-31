@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% block title %} 欢迎来到凡道平台{% endblock %}
-{% block nav %} 
-{{user.username}}
+{% block user %} 
+<a href="/dispuser/">{{user.username}}</a>
 <a href="/logout/">注销</a>
-<a href="/userinfo/" >完善用户信息</a>
+
 {% endblock %}
 {% block content %}
 <div>
 <div>
+<a href="/userinfo/" >个人信息</a>
 <a href="/createshare/" >增加一个分享</a>
 </div>
 <div>

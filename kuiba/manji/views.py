@@ -3,12 +3,20 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from models import FindaoUserInfo, FindaoTag, FindaoShare
 from forms import RegistUserForm, LoginUserForm, ShareForm, UserInfo
-from db_control import oldUser, addUser, findUser, findShare, addShare, addUserInfo, allShare
+from db_control import oldUser, addUser, findUser, findShare, addShare, addUserInfo, allShare, getUserInfo
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
 import hashlib
 
 def userinfo(req):
+    user = req.session.get('user',None)
+    if user:
+	print user.username
+	print user.email
+        userinfo = getUserInfo(user)
+        return render_to_response('userinfo.html',{'user':user, 'userinfo':userinfo})
+
+def createuserinfo(req):
     user = req.session.get('user',None)
     if req.method == 'POST':
 	ui = UserInfo(req.POST)
@@ -24,7 +32,7 @@ def userinfo(req):
 	
     else:
 	ui = UserInfo()
-	return render_to_response('userinfo.html',{'user':user, 'ui':ui})
+	return render_to_response('createuserinfo.html',{'user':user, 'ui':ui})
 
 def dispuser(req):
     user = req.session.get('user',None)
@@ -97,7 +105,7 @@ def regist(req):
 		    user = findUser(username, password)
 		    if user:
 		        req.session['user'] = user
-	                return HttpResponseRedirect('/userinfo/')
+	                return HttpResponseRedirect('/createuserinfo/')
 	        else:
 	            errorinfo = '两次密码不匹配'
                     uf = RegistUserForm()

@@ -21,5 +21,6 @@ urlpatterns = patterns('',
     url(r'^dispshare','manji.views.dispshare'),
     url(r'^createshare','manji.views.createshare'),
     url(r'^dispuser','manji.views.dispuser'),
+    url(r'^createuserinfo','manji.views.createuserinfo'),
     url(r'^userinfo','manji.views.userinfo'),
 )
