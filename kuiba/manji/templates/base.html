@@ -6,8 +6,8 @@
 <style type="text/css">
 @import url("/static/css/findao.css");
 /* test 完成后可以删掉下面一行 */
-a, ul, li, ol, dl, dd, dt, img, table, input, select, textarea, p, h1, h2, h3, h4, h5, h6, form, div {border:1px dotted;}
-
+/*a, ul, li, ol, dl, dd, dt, img, table, input, select, textarea, p, h1, h2, h3, h4, h5, h6, form, div {border:1px dotted;}
+*/
 </style>
 </head>
 <body>
@@ -15,20 +15,33 @@ a, ul, li, ol, dl, dd, dt, img, table, input, select, textarea, p, h1, h2, h3, h
 {% block main %}
 <div class="header" >
 {% block header %}
-<div class="findao" ><h3>凡道技术分享平台</h3>
-<div class="findaourl" ><a href="">www.findao.com</a></div>
+<div class="findao" ><h2>凡道技术分享平台</h2>
+<div class="findaourl" ><a href="/index/">www.findao.com</a></div>
 </div>
 {% endblock %}
-<div class="user" >{% block user %}{% endblock %}</div>
-</div>
+<div class="user" >
+{% block user %}
+{% if user %}
+<a href="/logout/">注销</a>
+<a href="/dispuser/">{{user.username}}</a>
+
+<a class="changeuserinfo" href="/userinfo/" >修改个人信息</a>
+{% else %}
+<a href="/login/">登录</a>
+<a href="/regist/">注册</a>
+{% endif %}
+{% endblock %}</div>
+</div><hr />
 {% block nav %}{% endblock %}
 
-{% block content %}
+
 <div class="content" >
+{% block content %}
 {% block search %}{% endblock %}
 {% block dispsearch %}{% endblock %}
-</div>
 {% endblock %}
+</div>
+
 
 {% endblock %}
 </div>

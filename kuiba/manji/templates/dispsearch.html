@@ -2,16 +2,6 @@
 
 {% block title %} 登录凡道平台{% endblock %}
 
-{% block user %} 
-{% if user %}
-<a href="/dispuser/">{{user.username}}</a>
-<a href="/logout/">注销</a>
-{% else %}
-<a href="/login/">登录</a>
-<a href="/regist/">注册</a>
-{% endif %}
-{% endblock %}
-
 {% block search %}
 <div class="minsearchshare" >
 <form method="post" >

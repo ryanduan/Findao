@@ -80,7 +80,7 @@ def login(req):
 		return HttpResponseRedirect('/dispuser/')
 	    else:
 		uf = LoginUserForm()
-		errorinfo = '用户或密码不正确！'
+		errorinfo = '* 用户或密码不正确！'
 	        return render_to_response('login.html',{'uf':uf, 'errorinfo':errorinfo})
     else:
 
@@ -93,7 +93,7 @@ def regist(req):
 	if uf.is_valid():
 	    username = uf.cleaned_data['username']
 	    if oldUser(username):
-		errorinfo = '用户已存在！'
+		errorinfo = '* 用户已存在！'
                 uf = RegistUserForm()
                 return render_to_response('regist.html',{'uf':uf, 'errorinfo':errorinfo})
 	    else:
@@ -107,7 +107,7 @@ def regist(req):
 		        req.session['user'] = user
 	                return HttpResponseRedirect('/createuserinfo/')
 	        else:
-	            errorinfo = '两次密码不匹配'
+	            errorinfo = '* 两次密码不匹配'
                     uf = RegistUserForm()
                 return render_to_response('regist.html',{'uf':uf, 'errorinfo':errorinfo})
     else :

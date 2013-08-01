@@ -18,11 +18,11 @@ a:hover, a:active, a:focus { color:#24BC70; text-decoration:underline; }
 .header{height: 50px;}
 .content{min-height: 390px;}
 .footer{height: 60px;width: 60%;position: relative;top: 10px;left: 20%;}
-.findao{margin-left: 80px;float: left;}
+.findao{margin-left: 80px;float: left;margin-top: 5px;}
 .findao h1, h2, h3, h4, h5, h6{color: #16265E;}
 .user{float: right;}
-.user a{margin-right: 10px;color: #184477;}
-.findaourl{clear: both;margin-left: 30px;font-size: 0.8em;font-style: italic;}
+.user a{margin-right: 10px;color: #184477;float: right;}
+.findaourl{clear: both;margin-left: 30px;font-size: 0.8em;font-style: italic;margin-top: 5px;}
 .findaourl a{color: #0E0D0D;}
 .searchshare{width: 600px;margin: 10px auto;margin-top: 80px;}
 .minsearchshare{width: 960px;margin: 20px auto;}
@@ -30,7 +30,25 @@ a:hover, a:active, a:focus { color:#24BC70; text-decoration:underline; }
 .searchbtn{height: 32px;width: 80px;font-size: 1.2em;margin-left: 2px;color: #184477;}
 .dispshares{width: 960px;margin: 10px auto;}
 .dispshare{width: 680px;margin-top: 10px;}
-.dispshare p{width: 660px;height: 42px;overflow: hidden;}
+.dispshare p{width: 660px;height: 40px;overflow: hidden;}
+.registuser{width: 600px;height:300px;  margin:60px auto;}
+.registtable tr{height: 50px;}
+.registtable th{font-size: 1.2em;}
+.errorinfo{font-size: 1.1em;margin-top: 10px;margin-left: 96px;color: #C92020;}
+.registbtn{width: 100px;height: 30px;font-size: 1.1em;margin-top: 30px;margin-left: 96px;border:1px solid black;color: #1C1A93;}
+.loginbtn{width: 100px;height: 30px;font-size: 1.1em;margin-top: 30px;margin-left: 74px;border:1px solid black;color: #1C1A93;}
+.userinfobtn{width: 100px;height: 30px;font-size: 1.1em;margin-top: 30px;margin-left: 96px;border:1px solid black;color: #1C1A93;}
+#id_username{width: 220px;height: 26px;font-size: 1.1em;border:1px double;}
+#id_password{width: 220px;height: 26px;font-size: 1.1em;border:1px double;}
+#id_password1{width: 220px;height: 26px;font-size: 1.1em;border:1px double;}
+#id_password2{width: 220px;height: 26px;font-size: 1.1em;border:1px double;}
+#id_first_name{width: 220px;height: 26px;font-size: 1.1em;border:1px double;}
+#id_last_name{width: 220px;height: 26px;font-size: 1.1em;border:1px double;}
+#id_birthday{width: 220px;height: 26px;font-size: 1.1em;border:1px double;}
+#id_address{width: 220px;height: 26px;font-size: 1.1em;border:1px double;}
+#id_email{width: 220px;height: 26px;font-size: 1.1em;border:1px double;}
+.returndispuser{font-size: 1.1em;width: 200px;height: 30px;margin-top: 10px;margin-left:360px; }
+.changeuserinfo{clear: both;font-size: 0.9em;}
 
 
 

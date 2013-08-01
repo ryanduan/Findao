@@ -1,13 +1,19 @@
 {% extends "base.html" %}
 {% block title %} 注册凡道护照{% endblock %}
-{% block user %} {% endblock %}
-{% block codes %}
+{% block content %}
+<div class="registuser" >
 <form  method="post" >
+<table class="registtable" >
 {{uf.as_table}}
-<p>{{errorinfo}}</p>
-<input type="submit" value="提交" />
-</form>
+</table>
+<p class="errorinfo" >{{errorinfo}}</p>
+<input class="registbtn" type="submit" value="注 册" />
 
+</form>
+<div class="returndispuser" >
+<a href="/login/">已有用户，直接登录</a>
+</div>
+</div>
 
 
 {% endblock %}
