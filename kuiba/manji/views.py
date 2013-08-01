@@ -119,8 +119,13 @@ def index(req):
     user = req.session.get('user', None)
     if req.method == 'POST':
 	sd = req.POST.get('search')
-	shares = allShare()
+	return HttpResponseRedirect('/dispsearch/')
     else:
 	shares = None
-    
     return render_to_response('index.html',{'user':user, 'shares':shares, 'shares':shares})
+
+def dispsearch(req):
+    user = req.session.get('user', None)
+    shares = allShare()
+    return render_to_response('dispsearch.html',{'user':user, 'shares':shares})
+

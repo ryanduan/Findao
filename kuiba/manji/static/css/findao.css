@@ -1,0 +1,36 @@
+/* reset */
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img { margin:0; padding:0; }
+fieldset, img { border:none; }
+img{display: block;}
+ul, ol { list-style:none; }
+input { padding-top:0; padding-bottom:0;}
+input::-moz-focus-inner { border:none; padding:0; }
+select, input { vertical-align:middle; }
+select, input, textarea { font-size:12px; margin:0; }
+input[type="text"], input[type="password"], textarea { outline-style:none; }
+textarea { resize:none; }
+table { border-collapse:collapse; }
+body { color:#333; padding:5px 0;  background:#fff;}
+a { color:#2B7B96; text-decoration:none; }
+a:visited { color:#0F1EC5; }
+a:hover, a:active, a:focus { color:#24BC70; text-decoration:underline; }
+.main{width: 78%;margin: 0 auto;clear: both;background-color: #fff;overflow: hidden;min-height: 450px; } 
+.header{height: 50px;}
+.content{min-height: 390px;}
+.footer{height: 60px;width: 60%;position: relative;top: 10px;left: 20%;}
+.findao{margin-left: 80px;float: left;}
+.findao h1, h2, h3, h4, h5, h6{color: #16265E;}
+.user{float: right;}
+.user a{margin-right: 10px;color: #184477;}
+.findaourl{clear: both;margin-left: 30px;font-size: 0.8em;font-style: italic;}
+.findaourl a{color: #0E0D0D;}
+.searchshare{width: 600px;margin: 10px auto;margin-top: 80px;}
+.minsearchshare{width: 960px;margin: 20px auto;}
+.searchinput{width: 420px;height: 30px;border:1px double #16301C;font-size: 1.1em;}
+.searchbtn{height: 32px;width: 80px;font-size: 1.2em;margin-left: 2px;color: #184477;}
+.dispshares{width: 960px;margin: 10px auto;}
+.dispshare{width: 680px;margin-top: 10px;}
+.dispshare p{width: 660px;height: 40px;overflow: hidden;}
+
+
+

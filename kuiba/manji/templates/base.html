@@ -2,42 +2,38 @@
 <html>
 <head>
 <meta charset="utf-8">
-
 <title>{% block title %}{% endblock %}</title>
+<style type="text/css">
+@import url("/static/css/findao.css");
+/* test 完成后可以删掉下面一行 */
+a, ul, li, ol, dl, dd, dt, img, table, input, select, textarea, p, h1, h2, h3, h4, h5, h6, form, div {border:1px dotted;}
+
+</style>
 </head>
 <body>
-<div>
-<div>
+<div class="main" >
 {% block main %}
-<div>
-{% block nav %}
-<div><h4>欢迎来到凡道技术分享平台</h4></div>
-{% endblock %}
-<div  >{% block user %}{% endblock %}</div>
-
+<div class="header" >
+{% block header %}
+<div class="findao" ><h3>凡道技术分享平台</h3>
+<div class="findaourl" ><a href="">www.findao.com</a></div>
 </div>
+{% endblock %}
+<div class="user" >{% block user %}{% endblock %}</div>
+</div>
+{% block nav %}{% endblock %}
 
 {% block content %}
-{% block somethinf %}
-
-{% endblock %}
-    <div>{% block search %}{% endblock %}</div>
-    {% block index %}
-    
-    <div>
-      {% block titles %}{% endblock %}
-    </div>
-    <div>
-      {% block codes %}{% endblock %}
-    </div>
-    <div></div>
-{% endblock %}
+<div class="content" >
+{% block search %}{% endblock %}
+{% block dispsearch %}{% endblock %}
+</div>
 {% endblock %}
 
+{% endblock %}
+</div>
 {% block footer %}
-<div>Findaoinfo</div>
+<div class="footer" >Findaoinfo</div>
 {% endblock %}
-{% endblock %}
-</div></div>
 </body>
 </html>
