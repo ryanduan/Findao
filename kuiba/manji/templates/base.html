@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<meta charset="utf-8">
 
 <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-<div class="container-fluid">
-<div class="row-fluid" >
+<div>
+<div>
 {% block main %}
-<div class="span12" >
+<div>
 {% block nav %}
-<div class="span9 offset2" ><h4>欢迎来到凡道技术分享平台</h4></div>
+<div><h4>欢迎来到凡道技术分享平台</h4></div>
 {% endblock %}
-<div class="span1" >{% block user %}{% endblock %}</div>
+<div  >{% block user %}{% endblock %}</div>
 
 </div>
 
-
 {% block content %}
-    <div class="span1"></div>
-    <div class="span2">
+{% block somethinf %}
+
+{% endblock %}
+    <div>{% block search %}{% endblock %}</div>
+    {% block index %}
+    
+    <div>
       {% block titles %}{% endblock %}
     </div>
-    <div class="span7">
+    <div>
       {% block codes %}{% endblock %}
     </div>
-    <div class="span2"></div>
-
+    <div></div>
+{% endblock %}
 {% endblock %}
 
 {% block footer %}
-<div class="span12" >Findaoinfo</div>
+<div>Findaoinfo</div>
 {% endblock %}
 {% endblock %}
 </div></div>

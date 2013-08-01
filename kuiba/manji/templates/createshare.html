@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 {% block title %} 欢迎来到凡道平台{% endblock %}
-{% block nav %} {% if user %}
-{{user.username}}<a href="/logout/">注销</a>
+{% block user %} {% if user %}
+<a href="/dispuser/">{{user.username}}</a>
+<a href="/logout/">注销</a>
 {% else %}
 <a href="/login/">登录</a>
 <a href="/regist/">注册</a>
 {% endif %}{% endblock %}
-{% block content %}
+{% block codes %}
 <div>
 <h3>新建一个分享</h3>
 <form method="post" >

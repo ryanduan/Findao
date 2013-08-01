@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block title %} 登录凡道平台{% endblock %}
-{% block nav %} {% endblock %}
-{% block content %}
+{% block user %} {% endblock %}
+{% block codes %}
 <form method="post" >
-{{uf.as_p}}
+{{uf.as_table}}
 <p>{{errorinfo}}</p>
 <input type="submit" value="提交" />
 </form>

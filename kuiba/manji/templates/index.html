@@ -12,9 +12,18 @@
 {% endif %}
 
 {% endblock %}
-{% block titles %}
+
+{% block search %}
+<formmethod="post" >
+  <input type="text"  name="search" >
+  <button type="submit" >&nbsp;&nbsp;搜&nbsp;&nbsp;&nbsp;&nbsp;索&nbsp;&nbsp;</button>
+</form>
+{% endblock %}
+
+{% block index %}
 {% for share in shares %}
-<div><h4>{{share.title}}</h4>
-</div>
+<div ><h4>{{share.title}}</h4></div>
 {% endfor %}
+
+
 {% endblock %}
