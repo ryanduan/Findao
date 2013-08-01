@@ -3,12 +3,20 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from models import FindaoUserInfo, FindaoTag, FindaoShare
 from forms import RegistUserForm, LoginUserForm, ShareForm, UserInfo
-from db_control import oldUser, addUser, findUser, findShare, addShare, addUserInfo, allShare
+from db_control import oldUser, addUser, findUser, findShare, addShare, addUserInfo, allShare, getUserInfo
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
 import hashlib
 
 def userinfo(req):
+    user = req.session.get('user',None)
+    if user:
+	print user.username
+	print user.email
+        userinfo = getUserInfo(user)
+        return render_to_response('userinfo.html',{'user':user, 'userinfo':userinfo})
+
+def createuserinfo(req):
     user = req.session.get('user',None)
     if req.method == 'POST':
 	ui = UserInfo(req.POST)
@@ -24,7 +32,7 @@ def userinfo(req):
 	
     else:
 	ui = UserInfo()
-	return render_to_response('userinfo.html',{'user':user, 'ui':ui})
+	return render_to_response('createuserinfo.html',{'user':user, 'ui':ui})
 
 def dispuser(req):
     user = req.session.get('user',None)
@@ -72,7 +80,7 @@ def login(req):
 		return HttpResponseRedirect('/dispuser/')
 	    else:
 		uf = LoginUserForm()
-		errorinfo = '用户或密码不正确！'
+		errorinfo = '* 用户或密码不正确！'
 	        return render_to_response('login.html',{'uf':uf, 'errorinfo':errorinfo})
     else:
 
@@ -85,7 +93,7 @@ def regist(req):
 	if uf.is_valid():
 	    username = uf.cleaned_data['username']
 	    if oldUser(username):
-		errorinfo = '用户已存在！'
+		errorinfo = '* 用户已存在！'
                 uf = RegistUserForm()
                 return render_to_response('regist.html',{'uf':uf, 'errorinfo':errorinfo})
 	    else:
@@ -97,9 +105,9 @@ def regist(req):
 		    user = findUser(username, password)
 		    if user:
 		        req.session['user'] = user
-	                return HttpResponseRedirect('/userinfo/')
+	                return HttpResponseRedirect('/createuserinfo/')
 	        else:
-	            errorinfo = '两次密码不匹配'
+	            errorinfo = '* 两次密码不匹配'
                     uf = RegistUserForm()
                 return render_to_response('regist.html',{'uf':uf, 'errorinfo':errorinfo})
     else :
@@ -109,5 +117,15 @@ def regist(req):
 
 def index(req):
     user = req.session.get('user', None)
+    if req.method == 'POST':
+	sd = req.POST.get('search')
+	return HttpResponseRedirect('/dispsearch/')
+    else:
+	shares = None
+    return render_to_response('index.html',{'user':user, 'shares':shares, 'shares':shares})
+
+def dispsearch(req):
+    user = req.session.get('user', None)
     shares = allShare()
-    return render_to_response('index.html',{'user':user, 'shares':shares})
+    return render_to_response('dispsearch.html',{'user':user, 'shares':shares})
+

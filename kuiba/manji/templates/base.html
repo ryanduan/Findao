@@ -1,22 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<title>{% block title %}凡道分享平台{% endblock %}</title>
+<meta charset="utf-8">
+<title>{% block title %}{% endblock %}</title>
+<style type="text/css">
+@import url("/static/css/findao.css");
+/* test 完成后可以删掉下面一行 */
+/*a, ul, li, ol, dl, dd, dt, img, table, input, select, textarea, p, h1, h2, h3, h4, h5, h6, form, div {border:1px dotted;}
+*/
+</style>
 </head>
 <body>
-<div>
+<div class="main" >
 {% block main %}
-<div>{% block nav %}{% endblock %}</div>
+<div class="header" >
+{% block header %}
+<div class="findao" ><h2>凡道技术分享平台</h2>
+<div class="findaourl" ><a href="/index/">www.findao.com</a></div>
+</div>
+{% endblock %}
+<div class="user" >
+{% block user %}
+{% if user %}
+<a href="/logout/">注销</a>
+<a href="/dispuser/">{{user.username}}</a>
 
-<div>{% block content %}
+<a class="changeuserinfo" href="/userinfo/" >修改个人信息</a>
+{% else %}
+<a href="/login/">登录</a>
+<a href="/regist/">注册</a>
+{% endif %}
+{% endblock %}</div>
+</div><hr />
+{% block nav %}{% endblock %}
+
+
+<div class="content" >
+{% block content %}
+{% block search %}{% endblock %}
+{% block dispsearch %}{% endblock %}
+{% endblock %}
+</div>
+
 
 {% endblock %}
 </div>
 {% block footer %}
-<div>Findaoinfo</div>
+<div class="footer" >Findaoinfo</div>
 {% endblock %}
-{% endblock %}
-</div>
 </body>
 </html>

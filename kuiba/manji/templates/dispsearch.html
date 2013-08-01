@@ -2,9 +2,8 @@
 
 {% block title %} 登录凡道平台{% endblock %}
 
-
 {% block search %}
-<div class="searchshare" >
+<div class="minsearchshare" >
 <form method="post" >
   <input class="searchinput" type="text"  name="search" >
   <input class="searchbtn" type="submit" value="搜 索">
@@ -12,3 +11,14 @@
 </div>
 {% endblock %}
 
+{% block dispsearch %}
+<div class="dispshares" >
+{% for share in shares %}
+<div class="dispshare" >
+<h4><a href="{{share.id}}">{{share.title}}</a></h4>
+<p>{{share.codes}}</p>
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}

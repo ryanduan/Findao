@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %} 欢迎来到凡道平台{% endblock %}
+
+{% block content %}
+<div class="registuser" >
+<form method="post" >
+<table class="registtable" >
+{{ui.as_table}}
+</table>
+<input class="userinfobtn" type="submit" value="确认修改" />
+</form>
+<div class="returndispuser" >
+<a  href="/dispuser/" >直接跳过，返回个人主页</a>
+</div>
+</div>
+{% endblock %}

@@ -1,10 +1,17 @@
 {% extends "base.html" %}
 {% block title %} 登录凡道平台{% endblock %}
-{% block nav %} {% endblock %}
+
 {% block content %}
+<div class="registuser" >
 <form method="post" >
-{{uf.as_p}}
-<p>{{errorinfo}}</p>
-<input type="submit" value="提交" />
+<table class="registtable" >
+{{uf.as_table}}
+</table>
+<p class="loginerrorinfo">{{errorinfo}}</p>
+<input class="loginbtn"  type="submit" value="登 录" />
 </form>
+<div class="returndispuser" >
+<a href="/regist/">还没有用户，赶快注册</a>
+</div>
+</div>
 {% endblock %}
