@@ -51,8 +51,8 @@ def oldUser(username):
     return user
     
 
-def addUser(username, password):
-    User.objects.create(username=username, password=password)
+def addUser(username, password, email):
+    User.objects.create(username=username, password=password, email=email)
         
 #    user = User.objects.get(username=username, password=password)
 #    group = Group.objects.get(name='findaousers')
@@ -70,6 +70,28 @@ def findUser(username, password):
 def findShare(username):
     shares = FindaoShare.objects.filter(whose__exact=username)
     return shares
+
+def getShare(search):
+    shares = []
+    sh1 = FindaoShare.objects.filter(title__contains=search)
+    sh2 = FindaoShare.objects.filter(codes__contains=search)
+    tag = FindaoTag.objects.filter(tagname__contains=search)
+    if tag:
+	for t in tag:
+	    sh3 = t.findaoshare_set.all()
+	    for sh in sh3:
+	        if sh not in shares:
+	            shares.append(sh)
+    if sh1:
+	for sh in sh1:
+	    if sh not in shares:
+	        shares.append(sh)
+    if sh2:
+	for sh in sh2:
+	    if sh not in shares:
+	        shares.append(sh)
+    return shares
+
 
 def allShare():
     shares = FindaoShare.objects.all()

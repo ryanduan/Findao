@@ -11,10 +11,10 @@ input[type="text"], input[type="password"], textarea { outline-style:none; }
 textarea { resize:none; }
 table { border-collapse:collapse; }
 body { color:#333; padding:5px 0;  background:#fff;}
-a { color:#2B7B96; text-decoration:none; }
+a { color:#0F1EC5; text-decoration:none; }
 a:visited { color:#0F1EC5; }
 a:hover, a:active, a:focus { color:#24BC70; text-decoration:underline; }
-.main{width: 78%;margin: 0 auto;clear: both;background-color: #fff;overflow: hidden;min-height: 520px; } 
+.main{width: 78%;margin: 0 auto;clear: both;background-color: #fff;overflow: hidden;min-height: 400px; } 
 .header{height: 50px;}
 .content{min-height: 390px;}
 .footer{height: 60px;width: 60%;position: relative;top: 10px;left: 20%;}
