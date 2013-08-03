@@ -21,7 +21,8 @@ def createuserinfo(req):
     if req.method == 'POST':
 	ui = UserInfo(req.POST)
 	if ui.is_valid():
-	    gender = ui.cleaned_data['gender']
+#	    gender = ui.cleaned_data['gender']
+	    gender = 'm'
 	    birthday = ui.cleaned_data['birthday']
 	    address = ui.cleaned_data['address']
 	    firstname = ui.cleaned_data['first_name']
@@ -37,7 +38,9 @@ def createuserinfo(req):
 def dispuser(req):
     user = req.session.get('user',None)
     if user:
-        return render_to_response('dispuser.html',{'user':user})
+        shares = findShare(user)
+        return render_to_response('dispuser.html',{'user':user, 'shares':shares})
+        #return render_to_response('dispuser.html',{'user':user})
     else:
 	return HttpResponseRedirect('/index/')
 

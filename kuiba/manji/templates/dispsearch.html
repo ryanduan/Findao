@@ -10,7 +10,7 @@
 </form>
 </div>
 {% endblock %}
-
+{% block content %}
 {% block dispsearch %}
 <div class="dispshares" >
 {% for share in shares %}
@@ -20,5 +20,6 @@
 </div>
 {% endfor %}
 </div>
-
 {% endblock %}
+{% endblock %}
+

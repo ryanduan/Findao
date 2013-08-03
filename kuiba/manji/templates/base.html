@@ -15,7 +15,7 @@
 {% block main %}
 <div class="header" >
 {% block header %}
-<div class="findao" ><h2>凡道技术分享平台</h2>
+<div class="findao" ><a href="/index/"><h2>凡道技术分享平台</h2></a>
 <div class="findaourl" ><a href="/index/">www.findao.com</a></div>
 </div>
 {% endblock %}
@@ -24,7 +24,6 @@
 {% if user %}
 <a href="/logout/">注销</a>
 <a href="/dispuser/">{{user.username}}</a>
-
 <a class="changeuserinfo" href="/userinfo/" >修改个人信息</a>
 {% else %}
 <a href="/login/">登录</a>
@@ -34,19 +33,32 @@
 </div><hr />
 {% block nav %}{% endblock %}
 
-
 <div class="content" >
 {% block content %}
 {% block search %}{% endblock %}
 {% block dispsearch %}{% endblock %}
+<div class="disptitle" >
+{% block disptitle %}{% endblock %}
+</div>
+<div class="dispcode" >
+{% block dispcode %}{% endblock %}
+</div>
 {% endblock %}
 </div>
-
-
 {% endblock %}
+<hr / class="footerhr" >
 </div>
+
+<div class="footer" >
 {% block footer %}
-<div class="footer" >Findaoinfo</div>
+<div class="footerinfo">
+<p>如有任何好的意见和建议，请联系我们：<a href="">凡道分享项目组</a> 
+</p>
+<p>
+我们项目开源地址：<a href="https://github.com/dyw564/Findao.git">GitHub</a> 
+</p>
+</div>
 {% endblock %}
+</div>
 </body>
 </html>
