@@ -10,7 +10,7 @@
 <div class="dispsharetitle" >
 <ol>
 {% for share in shares %}
-<li class="sharetitle" ><a href="{{share.id}}"><h3>{{share.title}}</h3></a></li>
+<li class="sharetitle" ><a href="/dispsearched/{{share.id}}"><h3>{{share.title}}</h3></a></li>
 {{share.ctime}}
 {% endfor %}
 </ol>
