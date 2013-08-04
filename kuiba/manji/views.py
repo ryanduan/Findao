@@ -48,19 +48,33 @@ def createshare(req):
     user = req.session.get('user', None)
     if req.method == 'POST':  
         title = req.POST.get('title')	
+	codes = req.POST.get('content')
+	tags = req.POST.get('tag')
 #	    title = sf.cleaned_data['title']
 #	    codes = sf.cleaned_data['codes']
 #	    tags = sf.cleaned_data['tags']
-#	    addShare(user, title, codes, tags)
+	addShare(user, title, codes, tags)
 	return HttpResponseRedirect('/dispshare/')
     else:
 	
         return render_to_response('createshare.html',{'user':user})
 
+def dispsearched(req, share_id):
+    user = req.session.get('user', None)
+    if req.method == 'POST':
+	sd = req.POST.get('search')
+	req.session['sd'] = sd
+	return HttpResponseRedirect('/dispsearch/')
+    else:
+        share_id = int(share_id)
+        share = FindaoShare.objects.get(id=share_id)
+        return render_to_response('share.html',{'user':user, 'share':share}) 
+
 def dispshare(req):
     user = req.session.get('user', None)
     if user:
         shares = findShare(user)
+	print shares[0].codes
         return render_to_response('dispshare.html',{'user':user, 'shares':shares})
     else:
 	return HttpResponseRedirect('/index/')

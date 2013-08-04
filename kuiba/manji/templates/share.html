@@ -14,18 +14,17 @@
 {% block dispsearch %}
 
 <div class="dispshares" >
-{% for share in shares %}
+
 <div class="dispshare" >
-<h4><a href="/dispsearched/{{share.id}}">{{share.title}}</a></h4>
-<div class="dispsharep">
+<h4><a href="">{{share.title}}</a></h4>
+
 {% autoescape off %}
 {{share.codes}}
 {% endautoescape %}
+
 </div>
-</div>
-{% endfor %}
+
 </div>
 
 {% endblock %}
 {% endblock %}
-

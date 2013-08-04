@@ -2,22 +2,14 @@
 {% block title %} 欢迎来到凡道平台{% endblock %}
 
 {% block content %}
-<div>
+
 <div>
 <a href="/createshare/" >增加一个分享</a>
 </div>
 <div>
 {% for share in shares %}
-<li>{{share.title}}</li>
+<li><a href="/dispsearched/{{share.id}}">{{share.title}}</a></li>
 {% endfor %}
-</div>
-<div>
-
-{% for share in shares %}
-<h4>{{share.title}}</h4>
-<p>{{share.ctime}}{{share.tags.tagname}}</p>
-<div>{{share.codes}}</div>
-{% endfor %}
-</div>
 </div>
 {% endblock %}
+

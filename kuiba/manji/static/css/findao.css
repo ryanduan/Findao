@@ -30,7 +30,7 @@ a:hover, a:active, a:focus { color:#24BC70; text-decoration:underline; }
 .searchbtn{height: 32px;width: 80px;font-size: 1.2em;margin-left: 2px;color: #184477;}
 .dispshares{width: 960px;margin: 10px auto;}
 .dispshare{width: 680px;margin-top: 10px;}
-.dispshare p{width: 660px;height: 40px;overflow: hidden;}
+.dispsharep{width: 660px;height: 39px;overflow: hidden;}
 .registuser{width: 600px;height:300px;  margin:60px auto;}
 .registtable tr{height: 50px;}
 .registtable th{font-size: 1.2em;}
