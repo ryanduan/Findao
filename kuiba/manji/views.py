@@ -3,7 +3,7 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from models import FindaoUserInfo, FindaoTag, FindaoShare
 from forms import RegistUserForm, LoginUserForm, ShareForm, UserInfo
-from db_control import oldUser, addUser, findUser, findShare, addShare, addUserInfo, allShare, getUserInfo
+from db_control import oldUser, addUser, findUser, findShare, addShare, addUserInfo, allShare, getUserInfo, getShare
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
 import hashlib
@@ -21,7 +21,8 @@ def createuserinfo(req):
     if req.method == 'POST':
 	ui = UserInfo(req.POST)
 	if ui.is_valid():
-	    gender = ui.cleaned_data['gender']
+#	    gender = ui.cleaned_data['gender']
+	    gender = 'm'
 	    birthday = ui.cleaned_data['birthday']
 	    address = ui.cleaned_data['address']
 	    firstname = ui.cleaned_data['first_name']
@@ -37,23 +38,24 @@ def createuserinfo(req):
 def dispuser(req):
     user = req.session.get('user',None)
     if user:
-        return render_to_response('dispuser.html',{'user':user})
+        shares = findShare(user)
+        return render_to_response('dispuser.html',{'user':user, 'shares':shares})
+        #return render_to_response('dispuser.html',{'user':user})
     else:
 	return HttpResponseRedirect('/index/')
 
 def createshare(req):
     user = req.session.get('user', None)
     if req.method == 'POST':  
-	sf = ShareForm(req.POST)
-	if sf.is_valid():
-	    title = sf.cleaned_data['title']
-	    codes = sf.cleaned_data['codes']
-	    tags = sf.cleaned_data['tags']
-	    addShare(user, title, codes, tags)
+        title = req.POST.get('title')	
+#	    title = sf.cleaned_data['title']
+#	    codes = sf.cleaned_data['codes']
+#	    tags = sf.cleaned_data['tags']
+#	    addShare(user, title, codes, tags)
 	return HttpResponseRedirect('/dispshare/')
     else:
-	sf = ShareForm()
-        return render_to_response('createshare.html',{'user':user, 'sf':sf})
+	
+        return render_to_response('createshare.html',{'user':user})
 
 def dispshare(req):
     user = req.session.get('user', None)
@@ -101,11 +103,12 @@ def regist(req):
 	        p2 = uf.cleaned_data['password2']
 	        if p1 == p2:
 	            password = hashlib.md5(p1).hexdigest()
-	            addUser(username, password)
+		    email = uf.cleaned_data['email']
+	            addUser(username, password, email)
 		    user = findUser(username, password)
 		    if user:
 		        req.session['user'] = user
-	                return HttpResponseRedirect('/createuserinfo/')
+	                return HttpResponseRedirect('/dispuser/')
 	        else:
 	            errorinfo = '* 两次密码不匹配'
                     uf = RegistUserForm()
@@ -119,6 +122,7 @@ def index(req):
     user = req.session.get('user', None)
     if req.method == 'POST':
 	sd = req.POST.get('search')
+	req.session['sd'] = sd
 	return HttpResponseRedirect('/dispsearch/')
     else:
 	shares = None
@@ -126,6 +130,26 @@ def index(req):
 
 def dispsearch(req):
     user = req.session.get('user', None)
-    shares = allShare()
-    return render_to_response('dispsearch.html',{'user':user, 'shares':shares})
+    if req.method == 'POST':
+	sd = req.POST.get('search')
+        if sd:
+            shares = getShare(sd)
+            if not shares:
+        	shares = None
+            return render_to_response('dispsearch.html',{'user':user, 'shares':shares})
+	else:
+	    return HttpResponseRedirect('/index/')
+    else:
+        sd = req.session.get('sd', None)
+        if sd:
+            shares = getShare(sd)
+	    if not shares:
+	        shares = None
+            return render_to_response('dispsearch.html',{'user':user, 'shares':shares})
+        else:
+	    return HttpResponseRedirect('/index/')
 
+def teaminfo(req):
+    user = req.session.get('user', None)
+    return render_to_response('teaminfo.html',{'user':user})
+    

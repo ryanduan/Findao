@@ -11,10 +11,10 @@ input[type="text"], input[type="password"], textarea { outline-style:none; }
 textarea { resize:none; }
 table { border-collapse:collapse; }
 body { color:#333; padding:5px 0;  background:#fff;}
-a { color:#2B7B96; text-decoration:none; }
+a { color:#0F1EC5; text-decoration:none; }
 a:visited { color:#0F1EC5; }
 a:hover, a:active, a:focus { color:#24BC70; text-decoration:underline; }
-.main{width: 78%;margin: 0 auto;clear: both;background-color: #fff;overflow: hidden;min-height: 450px; } 
+.main{width: 78%;margin: 0 auto;clear: both;background-color: #fff;overflow: hidden;min-height: 400px; } 
 .header{height: 50px;}
 .content{min-height: 390px;}
 .footer{height: 60px;width: 60%;position: relative;top: 10px;left: 20%;}
@@ -50,6 +50,19 @@ a:hover, a:active, a:focus { color:#24BC70; text-decoration:underline; }
 #id_email{width: 220px;height: 26px;font-size: 1.1em;border:1px double;}
 .returndispuser{font-size: 1.1em;width: 200px;height: 30px;margin-top: 10px;margin-left:360px; }
 .changeuserinfo{clear: both;font-size: 0.9em;}
-
+.dispcode{width: 620px;min-height: 400px;margin-left: 100px;}
+.disptitle{width: 220px;min-height: 400px;float: right;}
+.addshare{width:160px;margin: 10px auto; }
+.dispsharetitle{width: 480px;margin-top: 40px;}
+.sharetitle{margin-top: 20px;}
+.footerhr{margin-top: 60px;}
+.developteam{margin-top: 60px;margin-left: 80px;}
+.teamh{color: #000;margin-top: 20px;width: 500px;}
+.shareform{width: 880px;min-height: 480px;margin-top: 10px;margin-left: 60px;}
+.sharetitle{font-size: 1.1em;font-weight: bold;color: #16265E;}
+.titleinput{clear: both;width: 480px;height: 28px;font-size: 1.1em;}
+.sharecode{clear: both;width: 860px;min-height: 460px;visibility: hidden;}
+.sharesubmit{width: 100px;height: 30px;font-size: 1em;}
+.sharetag{width: 360px;height: 26px;font-size: 1em;}
 
 

@@ -1,23 +1,19 @@
 {% extends "base.html" %}
 {% block title %} 欢迎来到凡道平台{% endblock %}
-
-{% block content %}
-<div>
-<div>
-
+{% block disptitle %}
+<div class="addshare" >
 <a href="/createshare/" >增加一个分享</a>
 </div>
-<div>
+
+{% endblock %}
+{% block dispcode %}
+<div class="dispsharetitle" >
+<ol>
 {% for share in shares %}
-<li>{{share.title}}</li>
+<li class="sharetitle" ><a href="{{share.id}}"><h3>{{share.title}}</h3></a></li>
+{{share.ctime}}
 {% endfor %}
+</ol>
 </div>
-<div>
-{% for share in shares %}
-<h4>{{share.title}}</h4>
-<p>{{share.ctime}}{{share.tags.tagname}}</p>
-<p>{{share.codes}}</p>
-{% endfor %}
-</div>
-</div>
+
 {% endblock %}

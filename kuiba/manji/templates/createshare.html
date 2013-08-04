@@ -1,17 +1,59 @@
 {% extends "base.html" %}
-{% block title %} 欢迎来到凡道平台{% endblock %}
 
+{% block title %}新建分享{% endblock %}
+{% block js %}
+<link rel="stylesheet" href="/static/findaoeditor/themes/default/default.css" />
+<script charset="utf-8" src="/static/findaoeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/static/findaoeditor/lang/zh_CN.js"></script>
+<script>
+	var editor;
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="content"]', {
+			allowFileManager : true
+		});
+		K('input[name=getHtml]').click(function(e) {
+			alert(editor.html());
+		});
+		K('input[name=isEmpty]').click(function(e) {
+			alert(editor.isEmpty());
+		});
+		K('input[name=getText]').click(function(e) {
+			alert(editor.text());
+		});
+		K('input[name=selectedHtml]').click(function(e) {
+			alert(editor.selectedHtml());
+		});
+		K('input[name=setHtml]').click(function(e) {
+			editor.html('<h3>Hello KindEditor</h3>');
+		});
+		K('input[name=setText]').click(function(e) {
+			editor.text('<h3>Hello KindEditor</h3>');
+		});
+		K('input[name=insertHtml]').click(function(e) {
+			editor.insertHtml('<strong>插入HTML</strong>');
+		});
+		K('input[name=appendHtml]').click(function(e) {
+			editor.appendHtml('<strong>添加HTML</strong>');
+		});
+		K('input[name=clear]').click(function(e) {
+			editor.html('');
+		});
+	});
+	
+</script>
+
+{% endblock %}	
 {% block content %}
-<div>
-<h3>新建一个分享</h3>
-<form method="post" >
-{{sf.as_p}}
-<input type="submit" value="提交" />
-</form>
-<div>
-</div>
-<div>
+<h4>新建一个分享：</h4>
+<form class="shareform" method="post" >
+   
+    <font class="sharetitle" >标 题：</font><input class="titleinput" type="text" value="标题" name="title" />
 
-</div>
-</div>
+	<textarea class="sharecode" name="content"></textarea>
+	<font class="sharetitle" >标 签：</font><input class="sharetag" type="text" value="标签" name="tag" /><br />
+    <input class="sharesubmit" id="sharesubmit" type="submit" value="发表分享" /> 
+</form>
 {% endblock %}
+
+
+

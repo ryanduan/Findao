@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %} 登录凡道平台{% endblock %}
-
+{% block content %}
 {% block search %}
 <div class="minsearchshare" >
 <form method="post" >
@@ -12,6 +12,7 @@
 {% endblock %}
 
 {% block dispsearch %}
+
 <div class="dispshares" >
 {% for share in shares %}
 <div class="dispshare" >
@@ -22,3 +23,5 @@
 </div>
 
 {% endblock %}
+{% endblock %}
+
