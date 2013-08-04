@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %} 欢迎来到凡道平台{% endblock %}
+{% block js %}
+<script charset="utf-8" src="/static/js/kindeditor.js"></script>
+<script charset="utf-8" src="/static/js/lang/zh_CN.js"></script>
+		<script>
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="content"]', {
+					allowFileManager : true
+				});
+				K('input[name=getHtml]').click(function(e) {
+					alert(editor.html());
+				});
+				K('input[name=isEmpty]').click(function(e) {
+					alert(editor.isEmpty());
+				});
+				K('input[name=getText]').click(function(e) {
+					alert(editor.text());
+				});
+				K('input[name=selectedHtml]').click(function(e) {
+					alert(editor.selectedHtml());
+				});
+				K('input[name=setHtml]').click(function(e) {
+					editor.html('<h3>Hello KindEditor</h3>');
+				});
+				K('input[name=setText]').click(function(e) {
+					editor.text('<h3>Hello KindEditor</h3>');
+				});
+				K('input[name=insertHtml]').click(function(e) {
+					editor.insertHtml('<strong>插入HTML</strong>');
+				});
+				K('input[name=appendHtml]').click(function(e) {
+					editor.appendHtml('<strong>添加HTML</strong>');
+				});
+				K('input[name=clear]').click(function(e) {
+					editor.html('');
+				});
+			});
+		</script>
+
+{% endblock %}
+{% block content %}
+<div>
+<!--<h3>新建一个分享</h3>
+<form method="post" >
+{{sf.as_p}}
+<input type="submit" value="提交" />
+</form>
+<div>
+</div>
+<div>
+
+</div>
+-->
+<textarea id="editor_id" name="content" style="width:700px;height:300px;">
+aa
+</textarea>
+</div>
+{% endblock %}

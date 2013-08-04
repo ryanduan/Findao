@@ -9,6 +9,8 @@
 /*a, ul, li, ol, dl, dd, dt, img, table, input, select, textarea, p, h1, h2, h3, h4, h5, h6, form, div {border:1px dotted;}
 */
 </style>
+{% block js %}
+{% endblock %}
 </head>
 <body>
 <div class="main" >
@@ -52,10 +54,10 @@
 <div class="footer" >
 {% block footer %}
 <div class="footerinfo">
-<p>如有任何好的意见和建议，请联系我们：<a href="">凡道分享项目组</a> 
+<p>如有任何好的意见和建议，请联系我们：<a href="/teaminfo/">凡道分享项目组</a> 
 </p>
 <p>
-我们项目开源地址：<a href="https://github.com/dyw564/Findao.git">GitHub</a> 
+我们项目在<a href="https://github.com/dyw564/Findao.git">GitHub</a>开源地址：<a href="https://github.com/dyw564/Findao.git">https://github.com/dyw564/Findao.git</a>
 </p>
 </div>
 {% endblock %}

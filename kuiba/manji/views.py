@@ -47,16 +47,15 @@ def dispuser(req):
 def createshare(req):
     user = req.session.get('user', None)
     if req.method == 'POST':  
-	sf = ShareForm(req.POST)
-	if sf.is_valid():
-	    title = sf.cleaned_data['title']
-	    codes = sf.cleaned_data['codes']
-	    tags = sf.cleaned_data['tags']
-	    addShare(user, title, codes, tags)
+        title = req.POST.get('title')	
+#	    title = sf.cleaned_data['title']
+#	    codes = sf.cleaned_data['codes']
+#	    tags = sf.cleaned_data['tags']
+#	    addShare(user, title, codes, tags)
 	return HttpResponseRedirect('/dispshare/')
     else:
-	sf = ShareForm()
-        return render_to_response('createshare.html',{'user':user, 'sf':sf})
+	
+        return render_to_response('createshare.html',{'user':user})
 
 def dispshare(req):
     user = req.session.get('user', None)
@@ -150,3 +149,7 @@ def dispsearch(req):
         else:
 	    return HttpResponseRedirect('/index/')
 
+def teaminfo(req):
+    user = req.session.get('user', None)
+    return render_to_response('teaminfo.html',{'user':user})
+    

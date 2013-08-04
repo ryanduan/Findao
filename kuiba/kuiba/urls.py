@@ -14,6 +14,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$','manji.views.index'),
     url(r'^index/$','manji.views.index'),
     url(r'^regist/','manji.views.regist'),
     url(r'^login/$','manji.views.login'),
@@ -24,4 +25,5 @@ urlpatterns = patterns('',
     url(r'^createuserinfo/','manji.views.createuserinfo'),
     url(r'^userinfo/','manji.views.userinfo'),
     url(r'^dispsearch','manji.views.dispsearch'),
+    url(r'^teaminfo','manji.views.teaminfo'),
 )
