@@ -18,9 +18,7 @@
 <div class="dispshare" >
 <h4><a href="/dispsearched/{{share.id}}">{{share.title}}</a></h4>
 <div class="dispsharep">
-{% autoescape off %}
-{{share.codes}}
-{% endautoescape %}
+{{share.whose.username}} {{share.ctime}}
 </div>
 </div>
 {% endfor %}

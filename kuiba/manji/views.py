@@ -11,8 +11,6 @@ import hashlib
 def userinfo(req):
     user = req.session.get('user',None)
     if user:
-	print user.username
-	print user.email
         userinfo = getUserInfo(user)
         return render_to_response('userinfo.html',{'user':user, 'userinfo':userinfo})
 
