@@ -12,6 +12,9 @@ def getUserInfo(user):
     userinfo = FindaoUserInfo.objects.get(user = user)
     return userinfo
     
+def onlyShare(id):
+    share = FindaoShare.objects.get(id=id)
+    return share
 
 def addUserInfo(user, gender, birthday, address, firstname, lastname, email):
     FindaoUserInfo.objects.create(user=user, gender=gender, birthday=birthday,address=address)

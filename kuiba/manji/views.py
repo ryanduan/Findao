@@ -3,8 +3,8 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from models import FindaoUserInfo, FindaoTag, FindaoShare
 from forms import RegistUserForm, LoginUserForm, ShareForm, UserInfo
-from db_control import oldUser, addUser, findUser, findShare, addShare, addUserInfo, allShare, getUserInfo, getShare
-from django.contrib.auth import login, logout
+from db_control import oldUser, addUser, findUser, findShare, addShare, addUserInfo, allShare, getUserInfo, getShare, onlyShare
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 import hashlib
 
@@ -21,7 +21,6 @@ def createuserinfo(req):
     if req.method == 'POST':
 	ui = UserInfo(req.POST)
 	if ui.is_valid():
-#	    gender = ui.cleaned_data['gender']
 	    gender = 'm'
 	    birthday = ui.cleaned_data['birthday']
 	    address = ui.cleaned_data['address']
@@ -40,7 +39,6 @@ def dispuser(req):
     if user:
         shares = findShare(user)
         return render_to_response('dispuser.html',{'user':user, 'shares':shares})
-        #return render_to_response('dispuser.html',{'user':user})
     else:
 	return HttpResponseRedirect('/index/')
 
@@ -50,9 +48,6 @@ def createshare(req):
         title = req.POST.get('title')	
 	codes = req.POST.get('content')
 	tags = req.POST.get('tag')
-#	    title = sf.cleaned_data['title']
-#	    codes = sf.cleaned_data['codes']
-#	    tags = sf.cleaned_data['tags']
 	addShare(user, title, codes, tags)
 	return HttpResponseRedirect('/dispshare/')
     else:
@@ -67,7 +62,7 @@ def dispsearched(req, share_id):
 	return HttpResponseRedirect('/dispsearch/')
     else:
         share_id = int(share_id)
-        share = FindaoShare.objects.get(id=share_id)
+        share = onlyShare(share_id)
         return render_to_response('share.html',{'user':user, 'share':share}) 
 
 def dispshare(req):
@@ -89,8 +84,9 @@ def login(req):
 	if uf.is_valid():
 	    username = uf.cleaned_data['username']
 	    pw = uf.cleaned_data['password']
-	    password = hashlib.md5(pw).hexdigest()
+	    password = hashlib.sha256(pw).hexdigest()
 	    user = findUser(username, password)
+	    #user = authenticate(username=username, password=password)
 	    if user:
 		req.session['user'] = user
 		return HttpResponseRedirect('/dispuser/')
@@ -116,7 +112,7 @@ def regist(req):
 	        p1 = uf.cleaned_data['password1']
 	        p2 = uf.cleaned_data['password2']
 	        if p1 == p2:
-	            password = hashlib.md5(p1).hexdigest()
+	            password = hashlib.sha256(p1).hexdigest()
 		    email = uf.cleaned_data['email']
 	            addUser(username, password, email)
 		    user = findUser(username, password)

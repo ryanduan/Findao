@@ -51,7 +51,7 @@ class RegistUserForm(forms.Form):
 class LoginUserForm(forms.Form):
     username = forms.CharField(
         label='用户名', 
-	min_length=5, 
+	min_length=3, 
 	max_length=30,
 	)
     password = forms.CharField(
