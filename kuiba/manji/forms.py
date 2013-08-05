@@ -43,10 +43,10 @@ class RegistUserForm(forms.Form):
 	min_length=8, 
 	max_length=40,
 	)
-    email = forms.CharField(
-        max_length=30,
-	label='邮箱',
-	)
+#    email = forms.CharField(
+#        max_length=30,
+#	label='邮箱',
+#	)
 
 class LoginUserForm(forms.Form):
     username = forms.CharField(

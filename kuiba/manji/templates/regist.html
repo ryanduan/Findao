@@ -8,6 +8,14 @@
 <form  method="post" >
 <table class="registtable" >
 {{uf.as_table}}
+<tr>
+<th>
+<label for="id_email">邮箱:</label>
+</th>
+<td>
+<input id="id_email" type="email" name="email" maxlength="40">
+</td>
+</tr>
 </table>
 <p class="errorinfo" >{{errorinfo}}</p>
 <input class="registbtn" type="submit" value="注 册" />

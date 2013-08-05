@@ -33,6 +33,9 @@ def createuserinfo(req):
 	return render_to_response('createuserinfo.html',{'user':user, 'ui':ui})
 
 def dispuser(req):
+    share_id = req.session.get('share_id', None)
+    if share_id:
+        del req.session['share_id']
     user = req.session.get('user',None)
     if user:
         shares = findShare(user)
@@ -44,12 +47,14 @@ def trashshare(req):
     user = req.session.get('user', None)
     share_id = req.session.get('share_id', None)
     trashShare(share_id)
+    del req.session['share_id']
     return HttpResponseRedirect('/dispshare/')
 
 def deleteshare(req):
     user = req.session.get('user', None)
     share_id = req.session.get('share_id', None)
     deleteShare(share_id)
+    del req.session['share_id']
     return HttpResponseRedirect('/dispshare/')
 
 def createshare(req):
@@ -92,10 +97,12 @@ def dispsearched(req, share_id):
         return render_to_response('share.html',{'user':user, 'share':share}) 
 
 def dispshare(req):
+    share_id = req.session.get('share_id', None)
+    if share_id:
+        del req.session['share_id']
     user = req.session.get('user', None)
     if user:
         shares = findShare(user)
-	print shares[0].codes
         return render_to_response('dispshare.html',{'user':user, 'shares':shares})
     else:
 	return HttpResponseRedirect('/index/')
@@ -139,7 +146,7 @@ def regist(req):
 	        p2 = uf.cleaned_data['password2']
 	        if p1 == p2:
 	            password = hashlib.sha256(p1).hexdigest()
-		    email = uf.cleaned_data['email']
+		    email = req.POST.get('email')
 	            addUser(username, password, email)
 		    user = findUser(username, password)
 		    if user:
@@ -165,6 +172,9 @@ def index(req):
     return render_to_response('index.html',{'user':user, 'shares':shares, 'shares':shares})
 
 def dispsearch(req):
+    share_id = req.session.get('share_id', None)
+    if share_id:
+        del req.session['share_id']
     user = req.session.get('user', None)
     if req.method == 'POST':
 	sd = req.POST.get('search')
