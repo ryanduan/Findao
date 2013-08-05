@@ -16,12 +16,17 @@
 <div class="dispshares" >
 
 <div class="dispshare" >
-<h4><a href="">{{share.title}}</a></h4>
+<h3 class="sharetitles" ><a href="">{{share.title}}</a></h3>
+<a class="shareedit" href="/createshare/" >编辑</a>
+<a class="sharedel" href="/trashshare/" >删除</a>
+<div class="whosetime" >
 {{share.whose.username}} {{share.ctime}}
+</div>
+<div class="sharecodes" >
 {% autoescape off %}
 {{share.codes}}
 {% endautoescape %}
-
+</div>
 </div>
 
 </div>

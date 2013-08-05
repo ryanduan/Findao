@@ -27,4 +27,7 @@ urlpatterns = patterns('',
     url(r'^dispsearch/','manji.views.dispsearch'),
     url(r'^dispsearched/(\d{1,4})','manji.views.dispsearched'),
     url(r'^teaminfo/','manji.views.teaminfo'),
+    url(r'^deleteshare/','manji.views.deleteshare'),
+    url(r'^trashshare/','manji.views.trashshare'),
+    url(r'^trash/','manji.views.trash'),
 )

@@ -13,13 +13,38 @@ def getUserInfo(user):
     return userinfo
     
 def onlyShare(id):
-    share = FindaoShare.objects.get(id=id)
+    try:
+        share = FindaoShare.objects.get(id=id)
+    except ObjectDoesNotExist:
+        share = None
     return share
 
 def addUserInfo(user, gender, birthday, address, firstname, lastname, email):
     FindaoUserInfo.objects.create(user=user, gender=gender, birthday=birthday,address=address)
     User.objects.filter(id=user.id).update(first_name=firstname, last_name=lastname, email=email)
 #    User.objects.create(first_name=firstname, last_name=lastname, email=email)
+
+def getTrash(user):
+    tshares = user.findaoshare_set.filter(status__exact='2')
+    return tshares
+
+def deleteShare(id):
+    FindaoShare.objects.filter(id=id).delete()
+
+def trashShare(id):
+    FindaoShare.objects.filter(id=id).update(status='2')
+
+def updateShare(id, title, codes, tags):
+    FindaoShare.objects.filter(id=id).update(title=title, codes=codes)
+    share = FindaoShare.objects.get(id=id)
+    try:
+        rtag = FindaoTag.objects.get(tagname=tags)
+    except ObjectDoesNotExist:
+        rtag = None
+    if rtag:
+        share.tags.add(rtag)
+    else:
+         share.tags.create(tagname=tags)
 
 def addShare(user, title, codes, tags):
     user.findaoshare_set.create(title=title, codes=codes)
@@ -71,7 +96,7 @@ def findUser(username, password):
     return user
 
 def findShare(username):
-    shares = FindaoShare.objects.filter(whose__exact=username)
+    shares = FindaoShare.objects.filter(whose__exact=username, status__exact='1')
     return shares
 
 def getShare(search):
@@ -93,6 +118,9 @@ def getShare(search):
 	for sh in sh2:
 	    if sh not in shares:
 	        shares.append(sh)
+    for s in shares:
+	if s.status != '1':
+	    shares.remove(s)
     return shares
 
 

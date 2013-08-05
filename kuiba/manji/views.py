@@ -3,7 +3,7 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from models import FindaoUserInfo, FindaoTag, FindaoShare
 from forms import RegistUserForm, LoginUserForm, ShareForm, UserInfo
-from db_control import oldUser, addUser, findUser, findShare, addShare, addUserInfo, allShare, getUserInfo, getShare, onlyShare
+from db_control import oldUser, addUser, findUser, findShare, addShare, addUserInfo, allShare, getUserInfo, getShare, onlyShare, updateShare, deleteShare, trashShare, getTrash
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 import hashlib
@@ -40,17 +40,44 @@ def dispuser(req):
     else:
 	return HttpResponseRedirect('/index/')
 
+def trashshare(req):
+    user = req.session.get('user', None)
+    share_id = req.session.get('share_id', None)
+    trashShare(share_id)
+    return HttpResponseRedirect('/dispshare/')
+
+def deleteshare(req):
+    user = req.session.get('user', None)
+    share_id = req.session.get('share_id', None)
+    deleteShare(share_id)
+    return HttpResponseRedirect('/dispshare/')
+
 def createshare(req):
     user = req.session.get('user', None)
+    share_id = req.session.get('share_id', None)
     if req.method == 'POST':  
         title = req.POST.get('title')	
 	codes = req.POST.get('content')
 	tags = req.POST.get('tag')
-	addShare(user, title, codes, tags)
+	if share_id:
+	    updateShare(share_id, title, codes, tags)
+	    del req.session['share_id']
+	else:
+	    addShare(user, title, codes, tags)
 	return HttpResponseRedirect('/dispshare/')
     else:
-	
-        return render_to_response('createshare.html',{'user':user})
+        if share_id:
+	    print share_id
+            share = onlyShare(share_id)
+	else:
+	    share = None
+        return render_to_response('createshare.html',{'user':user, 'share':share})
+
+def trash(req):
+    user = req.session.get('user', None)
+    shares = getTrash(user)
+    return render_to_response('disptrash.html',{'shares':shares, 'user':user})
+    
 
 def dispsearched(req, share_id):
     user = req.session.get('user', None)
@@ -60,6 +87,7 @@ def dispsearched(req, share_id):
 	return HttpResponseRedirect('/dispsearch/')
     else:
         share_id = int(share_id)
+	req.session['share_id'] = share_id
         share = onlyShare(share_id)
         return render_to_response('share.html',{'user':user, 'share':share}) 
 

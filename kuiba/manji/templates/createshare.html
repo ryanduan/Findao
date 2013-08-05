@@ -44,6 +44,17 @@
 
 {% endblock %}	
 {% block content %}
+{% if share %}
+<h4>修改分享：</h4>
+<form class="shareform" method="post" >
+   
+    <font class="sharetitle" >标 题：</font><input class="titleinput" type="text" value="{{share.title}}" name="title" />
+
+	<textarea class="sharecode" name="content">{{share.codes}}</textarea>
+	<font class="sharetitle" >标 签：</font><input class="sharetag" type="text" value="标签" name="tag" /><br />
+    <input class="sharesubmit" id="sharesubmit" type="submit" value="发表分享" /> 
+</form>
+{% else %}
 <h4>新建一个分享：</h4>
 <form class="shareform" method="post" >
    
@@ -53,6 +64,7 @@
 	<font class="sharetitle" >标 签：</font><input class="sharetag" type="text" value="标签" name="tag" /><br />
     <input class="sharesubmit" id="sharesubmit" type="submit" value="发表分享" /> 
 </form>
+{% endif %}
 {% endblock %}
 
 
